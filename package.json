@@ -1,0 +1,29 @@
+{
+  "name": "amcharts-accessibility-plugin",
+  "version": "0.0.1",
+  "description": "A plugin to make charts from amchartjs.com accessible for keyboard and screen reader users",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paypal/amcharts-accessibility-plugin.git"
+  },
+  "keywords": [
+    "amchart",
+    "chart",
+    "accessibility",
+    "keyboard",
+    "navigation"
+  ],
+  "author": "PayPal Accessibility Team",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "a8f9bea752a92ff6dab9c2fb0a2a96c0cc0b907a",
+  "dependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-uglify": "~0.3.2"
+  },
+  "devDependencies": {}
+}
