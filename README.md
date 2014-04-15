@@ -6,14 +6,14 @@ See the [Authors](#authors) section below for more information.
 ## What is it?
 This plugin provides accessibility enhancements for a very versatile chart library from [amCharts.com](http://www.amcharts.com). Once applied, the plugin enables navigation for keyboard users and a rich experience for screen reader users.
 
-Watch a [screencast of the plugin in action](media/SR_amChartsAccessibility.mov) or try the live demo below:
+Watch a [screencast of the plugin in action](http://paypal.github.io/amcharts-accessibility-plugin/media/SR_amChartsAccessibility.mov) or try the live demo below:
 
 [<img src="images/amchart_screenshot.png" alt="Demo of amCharts Accessibility Plugin">](http://paypal.github.io/amcharts-accessibility-plugin/demo.html)
 
 
 ##Installation instructions
 
-Download the [amCharts Accessibility Plugin](https://github.com/paypal/amcharts-accessibility-plugin/blob/master/amstock-accessibility.js) from the amCharts Accessibility Plugin Github page and include it after the amCharts stock JavaScript on your site.
+Download the [amCharts Accessibility Plugin](plugins/amstock-accessibility.min.js) from the amCharts Accessibility Plugin Github page and include it after the amCharts stock JavaScript on your site.
 
 For example, here is the plugin called after amStock.js:
 
