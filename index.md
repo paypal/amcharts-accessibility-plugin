@@ -1,3 +1,7 @@
+---
+layout: index
+---
+
 <img src="images/logo/logo_347x50_PPa11y.png" alt="PayPal accessibility logo">
 # amCharts Accessibility Plugin
 ## by the PayPal Accessibility Team
