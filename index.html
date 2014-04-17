@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Amcharts-accessibility-plugin : A Plugin to make charts from amcharts.com Accessible " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Amcharts-accessibility-plugin</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/paypal/amcharts-accessibility-plugin">View on GitHub</a>
+
+          <h1 id="project_title">Amcharts-accessibility-plugin</h1>
+          <h2 id="project_tagline">A Plugin to make charts from amcharts.com Accessible </h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/paypal/amcharts-accessibility-plugin/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/paypal/amcharts-accessibility-plugin/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><img src="images/logo/logo_347x50_PPa11y.png" alt="PayPal accessibility logo"></p>
+
+<h1>
+<a name="amcharts-accessibility-plugin" class="anchor" href="#amcharts-accessibility-plugin"><span class="octicon octicon-link"></span></a>amCharts Accessibility Plugin</h1>
+
+<h2>
+<a name="by-the-paypal-accessibility-team" class="anchor" href="#by-the-paypal-accessibility-team"><span class="octicon octicon-link"></span></a>by the PayPal Accessibility Team</h2>
+
+<p>See the <a href="#authors">Authors</a> section below for more information.</p>
+
+<h2>
+<a name="what-is-it" class="anchor" href="#what-is-it"><span class="octicon octicon-link"></span></a>What is it?</h2>
+
+<p>This plugin provides accessibility enhancements for a very versatile chart library from <a href="http://www.amcharts.com">amCharts.com</a>. Once applied, the plugin enables navigation for keyboard users and provides the necessary support for screen reader users.</p>
+
+<p>Watch a <a href="http://paypal.github.io/amcharts-accessibility-plugin/media/SR_amChartsAccessibility.mov">screencast of the plugin in action</a> or try the live demo below:</p>
+
+<p><a href="http://paypal.github.io/amcharts-accessibility-plugin/demo.html"><img src="images/amchart_screenshot.png" alt="Demo of amCharts Accessibility Plugin"></a></p>
+
+<h2>
+<a name="installation-instructions" class="anchor" href="#installation-instructions"><span class="octicon octicon-link"></span></a>Installation instructions</h2>
+
+<p>Download the <a href="plugins/amstock-accessibility.min.js">amCharts Accessibility Plugin</a> from the amCharts Accessibility Plugin Github page and include it after the amCharts stock JavaScript on your site.</p>
+
+<p>For example, here is the plugin called after amStock.js:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"http://www.amcharts.com/lib/amstock.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"/js/amcharts-accessibility-plugin/plugins/amstock-acessibility.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<h2>
+<a name="keyboard-interaction" class="anchor" href="#keyboard-interaction"><span class="octicon octicon-link"></span></a>Keyboard interaction</h2>
+
+<p>After the plugin is applied to the amCharts code, the following keyboard navigation becomes possible:</p>
+
+<ul>
+<li>When focused on the chart, the left and right arrow keys navigate between the data points of the chart. To aid the navigation, the cursor tooltip is shown when the arrow keys are pressed.</li>
+<li>The Tab and Shift+Tab keys navigate between the chart, "Start Date" and "End Date" sliders that allow the user to control the date ranges for the chart.</li>
+</ul><h2>
+<a name="screen-reader-features" class="anchor" href="#screen-reader-features"><span class="octicon octicon-link"></span></a>Screen reader features</h2>
+
+<ul>
+<li>When navigating between the data points on the chart, the values on the x-axis and y-axis will be spoken.</li>
+<li>A "start of chart" and "end of chart" messages will be spoken when the start and the end of chart  data is reached.</li>
+<li>When changing the values for the "start date" or the "end date" sliders, the values will be read as well.</li>
+</ul><h2>
+<a name="implementation-notes" class="anchor" href="#implementation-notes"><span class="octicon octicon-link"></span></a>Implementation notes</h2>
+
+<ul>
+<li>This plugin utilizes <a href="http://www.w3.org/TR/wai-aria/">WAI-ARIA roles, states and properties</a> to enable the meaningful spoken feedback for screen reader users.</li>
+<li>The chart is a Div container with a role of application and aria-label and tabIndex of 0 in order to receive focus.</li>
+<li>A status Div is used to announce the tooltip to screen reader users. It is hidden offscreen and aria-live is set to polite and aria-atomic is set to true.</li>
+<li>The left slider is an SVG element which has aria-label, aria-valuemin, aria-valuemax, aria-valuetext and aria-valuenow.</li>
+<li>The right slider is also an SVG element with aria-label, aria-valuemin, aria-valuemax, aria-valuetext and aria-valuenow. </li>
+</ul><h2>
+<a name="known-issues" class="anchor" href="#known-issues"><span class="octicon octicon-link"></span></a>Known issues</h2>
+
+<p>The slider functionality doesn't work in Firefox as there is a bug in this browser which prevents an SVG element inside an SVG document getting focused. See <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=996407">this issue</a> for more information.</p>
+
+<h2>
+<a name="feedback-and-contributions" class="anchor" href="#feedback-and-contributions"><span class="octicon octicon-link"></span></a>Feedback and Contributions</h2>
+
+<p>Please do not hesitate to open an issue or send a pull request if something doesn't work or you have ideas for improvement. For instructions on how to contribute to this project please read the <a href="CONTRIBUTING.md">contribution guide</a>.</p>
+
+<h2>
+<a name="authors" class="anchor" href="#authors"><span class="octicon octicon-link"></span></a><a name="authors">Authors</a>
+</h2>
+
+<ul>
+<li><p>Prem Nawaz Khan, primary developer on the project.
+<a href="https://github.com/mpnkhan">https://github.com/mpnkhan</a> || <a href="https://twitter.com/mpnkhan">@mpnkhan</a></p></li>
+<li><p>Victor Tsaran, project lead, documentation, user interaction and testing
+<a href="https://github.com/vick08">https://github.com/vick08</a> || <a href="https://twitter.com/vick08">@vick08</a></p></li>
+<li><p>The rest of the PayPal Accessibility Team</p></li>
+</ul><h2>
+<a name="copyright-and-license" class="anchor" href="#copyright-and-license"><span class="octicon octicon-link"></span></a>Copyright and license</h2>
+
+<p>Copyright 2014, eBay Software Foundation under <a href="LICENSE.md">the BSD license</a>.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Amcharts-accessibility-plugin maintained by <a href="https://github.com/paypal">paypal</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
