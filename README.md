@@ -54,4 +54,4 @@ Please do not hesitate to open an issue or send a pull request if something does
   * The rest of the PayPal Accessibility Team
 
 ## Copyright and license
-Copyright 2014, eBay Software Foundation under [the BSD license](LICENSE.md).
+Copyright 2015, eBay Software Foundation under [the BSD license](LICENSE.md).
