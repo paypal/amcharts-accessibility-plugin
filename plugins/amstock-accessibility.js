@@ -127,32 +127,45 @@ amChartAccess.prototype = {
             })
         }         
     },
+    findInd: function (myArray, searchTerm, property) {
+        for(var i = 0, len = myArray.length; i < len; i++) {
+            if (myArray[i][property] == searchTerm) {
+                return i;
+            }    
+        }
+        return -1;
+    },
     chartKeyNavigation: function(e){
         var keyCode = e.keyCode || e.which,
             liveText='', i,j= this.graphs.length, graph,graphDataItem, serialDataItem, balloonText,
-            chartCursor = this.stockchart.chartCursors[0];
+            chartCursor = this.stockchart.chartCursors[0],
+            scrollbarChart = this.stockchart.scrollbarChart;
+
+            // console.log(chartCursor.chart);
 
         if (!/(37|39)/.test(keyCode)) return;
 
-        this.startIndex = chartCursor.start;
-        this.endIndex = chartCursor.end;
+        this.startIndex = chartCursor.chart.startIndex;
+        this.endIndex = chartCursor.chart.endIndex;
 
-        if(keyCode === 39) this.ind +=1;
-        if(keyCode === 37) this.ind -=1;
-
+        if(keyCode === 39) this.ind += 1;
+        if(keyCode === 37) this.ind -= 1;
 
         //Stick to end or beginning and do not wrap
         if (this.ind > this.endIndex) this.ind = this.endIndex;
         if (this.ind < this.startIndex) this.ind = this.startIndex;
 
-        chartCursor.showCursorAt(chartCursor.data[this.ind].category);
-        this.speakBalloon(chartCursor, chartCursor.data[this.ind].category, this.ind, this.startIndex,this.endIndex)
+        // console.log(this.ind, this.stockchart.mainDataSet.dataProvider[this.ind]);
+        var curObj= chartCursor.chart.chartData[this.ind]; 
+        chartCursor.showCursorAt(curObj.category);
+        this.speakBalloon(chartCursor, curObj.category, this.ind, this.startIndex,this.endIndex)
 
     },
     speakBalloon: function(chartCursor, category, index, startIndex, endIndex ){
         var liveText='', i, j= this.graphs.length, graph, graphDataItem, serialDataItem, balloonText, fDate = null;
         fDate= AmCharts.formatDate(category, chartCursor.categoryBalloonDateFormat);
         liveText =  this.sChart.categoryField + ' ' + fDate + '<br>';
+       
         for (i = 0; i < j; i++) {
             graph = this.graphs[i];
             serialDataItem= this.graphs[i].data[index];
@@ -160,12 +173,13 @@ amChartAccess.prototype = {
             balloonText = this.sChart.formatString(graph.balloonText, graphDataItem, graph);
             liveText = liveText + graph.title + ' : ' + balloonText + '<br>';
         }
-
-        if(this.ind === this.endIndex) liveText =   this.chartHlpTxtEnd + '. ' + liveText;
-        if(this.ind === this.startIndex) liveText = this.chartHlpTxtStart  + '. ' + liveText;
+        
+        if(index === this.endIndex) liveText =   this.chartHlpTxtEnd + '. ' + liveText;
+        if(index === this.startIndex) liveText = this.chartHlpTxtStart  + '. ' + liveText;
 
         this.statusDiv.innerHTML = liveText;
 
+        // console.log(liveText );
     },
     addAriaLeftSlider: function(){
         var _this=this,
