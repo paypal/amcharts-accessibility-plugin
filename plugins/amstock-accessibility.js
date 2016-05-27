@@ -61,7 +61,9 @@ amChartAccess.prototype = {
         this.startIndex = this.sChart.startIndex;
         this.endIndex = this.sChart.endIndex;
         this.graphs = stockchart.panels[0].graphs;
-        console.log(this.sChart);
+        this.sChart.chartScrollbar.iconLeft.node.setAttribute('tabIndex','0');
+        console.log(this.sChart.chartScrollbar.iconLeft.node.parentNode.parentNode);
+
         this.iconLeft = this.sChart.chartScrollbar.iconLeft;
         this.iconRight = this.sChart.chartScrollbar.iconRight;
         this.sliderMin = AmCharts.formatDate(this.sChart.chartData[0].category, this.sChart.balloonDateFormat);
@@ -179,6 +181,7 @@ amChartAccess.prototype = {
         // console.log(liveText );
     },
     addAriaLeftSlider: function(){
+        console.log(this.iconLeft.node);
         var _this=this,
             iconLeftLabel = this.leftSliderLabel + this.sChart.categoryField;
 
