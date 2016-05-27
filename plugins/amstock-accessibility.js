@@ -61,6 +61,7 @@ amChartAccess.prototype = {
         this.startIndex = this.sChart.startIndex;
         this.endIndex = this.sChart.endIndex;
         this.graphs = stockchart.panels[0].graphs;
+        console.log(this.sChart);
         this.iconLeft = this.sChart.chartScrollbar.iconLeft;
         this.iconRight = this.sChart.chartScrollbar.iconRight;
         this.sliderMin = AmCharts.formatDate(this.sChart.chartData[0].category, this.sChart.balloonDateFormat);
@@ -96,15 +97,11 @@ amChartAccess.prototype = {
     },
     createChartLabel: function(){
         var  allBullets,
-            chartCursor = this.stockchart.chartCursors[0],
-            firstTime = new Date(chartCursor.firstTime),
-            lastTime = new Date(chartCursor.lastTime),
+            chart = this.stockchart.chartCursors[0].chart,
+            firstTime = new Date(chart.firstTime),
+            lastTime = new Date(chart.lastTime),
             startLbl = AmCharts.formatDate(firstTime, 'MMM DD'),
             endLbl = AmCharts.formatDate(lastTime, 'MMM DD')
-
-           // for (var i = 0,j= this.graphs.length; i < j; i++) {           
-           //      this.chartLabel +=  this.graphs[i].title + ', ';
-           //  }
 
             this.chartLabel += startLbl + ' to ' + endLbl +'. ';
             this.chartLabel += this.chartHlpTxtNav;                
