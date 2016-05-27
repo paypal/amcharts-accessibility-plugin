@@ -42,7 +42,7 @@ After the plugin is applied to the amCharts code, the following keyboard navigat
 The slider functionality doesn't work in Firefox as there is a bug in this browser which prevents an SVG element inside an SVG document getting focused. See [this issue](https://bugzilla.mozilla.org/show_bug.cgi?id=778654) for more information.
 
 ## Update
-Recently updates to work with amstockchart_3.20.5 . The changes are in [branch  3.20.5](https://github.com/paypal/amcharts-accessibility-plugin/tree/3.20.5) .
+Recently updated to work with amstockchart_3.20.5 . The changes are in [branch  3.20.5](https://github.com/paypal/amcharts-accessibility-plugin/tree/3.20.5) .
 
 ## Feedback and Contributions
 Please do not hesitate to open an issue or send a pull request if something doesn't work or you have ideas for improvement. For instructions on how to contribute to this project please read the [contribution guide](CONTRIBUTING.md).
