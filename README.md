@@ -6,7 +6,7 @@ See the [Authors](#authors) section below for more information.
 ## What is it?
 This plugin provides accessibility enhancements for a very versatile chart library from [amCharts.com](http://www.amcharts.com). Once applied, the plugin enables navigation for keyboard users and provides the necessary support for screen reader users.
 
-Watch a [screencast of the plugin in action](http://paypal.github.io/amcharts-accessibility-plugin/media/SR_amChartsAccessibility.mov) or try the live demo below:
+Watch a [screencast of the plugin in action](http://paypal.github.io/amcharts-accessibility-plugin/media/SR_amChartsAccessibility.mp4) or try the live demo below:
 
 [<img src="images/amchart_screenshot.png" alt="Demo of amCharts Accessibility Plugin">](http://paypal.github.io/amcharts-accessibility-plugin/demo.html)
 
@@ -40,6 +40,9 @@ After the plugin is applied to the amCharts code, the following keyboard navigat
 
 ## Known issues
 The slider functionality doesn't work in Firefox as there is a bug in this browser which prevents an SVG element inside an SVG document getting focused. See [this issue](https://bugzilla.mozilla.org/show_bug.cgi?id=778654) for more information.
+
+## Update
+Recently updates to work with amstockchart_3.20.5 . The changes are in [branch  3.20.5](https://github.com/paypal/amcharts-accessibility-plugin/tree/3.20.5) .
 
 ## Feedback and Contributions
 Please do not hesitate to open an issue or send a pull request if something doesn't work or you have ideas for improvement. For instructions on how to contribute to this project please read the [contribution guide](CONTRIBUTING.md).
