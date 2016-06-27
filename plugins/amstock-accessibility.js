@@ -61,11 +61,10 @@ amChartAccess.prototype = {
         this.startIndex = this.sChart.startIndex;
         this.endIndex = this.sChart.endIndex;
         this.graphs = stockchart.panels[0].graphs;
-        this.sChart.chartScrollbar.iconLeft.node.setAttribute('tabIndex','0');
-        console.log(this.sChart.chartScrollbar.iconLeft.node.parentNode.parentNode);
 
         this.iconLeft = this.sChart.chartScrollbar.iconLeft;
         this.iconRight = this.sChart.chartScrollbar.iconRight;
+        
         this.sliderMin = AmCharts.formatDate(this.sChart.chartData[0].category, this.sChart.balloonDateFormat);
         this.sliderMax = AmCharts.formatDate(this.sChart.chartData[this.sChart.chartData.length-1].category, this.sChart.balloonDateFormat);
         this.step = this.sChart.chartScrollbar.stepWidth;
@@ -181,7 +180,7 @@ amChartAccess.prototype = {
         // console.log(liveText );
     },
     addAriaLeftSlider: function(){
-        console.log(this.iconLeft.node);
+        // console.log(this.iconLeft.node);
         var _this=this,
             iconLeftLabel = this.leftSliderLabel + this.sChart.categoryField;
 
@@ -193,6 +192,7 @@ amChartAccess.prototype = {
         this.iconLeft.node.setAttribute("aria-valuemin", this.sliderMin);
         this.iconLeft.node.setAttribute("aria-valuemax", this.sliderMax);
         this.iconLeft.node.setAttribute("aria-valuetext", this.sliderMin);
+
         if (AmCharts.isNN) {
             this.iconLeft.node.addEventListener('keydown', function(e){ _this.leftSliderKeyNav(e)});
             this.iconLeft.node.addEventListener('focusout', function(e){}); 

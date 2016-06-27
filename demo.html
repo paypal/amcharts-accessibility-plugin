@@ -242,8 +242,9 @@
                                             'leftSliderLabel':'Start',
                                             'rightSliderLabel':'End'
                                         }
-
+                setTimeout(function(){
                     amChartAccess.prototype.init(totalSalesChart , chartArguments);
+                }, 1000);
                     
             }   
 
@@ -253,7 +254,7 @@
                     anchors[i].setAttribute('tabIndex',-1);
                 }
                 // console.log('here', anchors);
-            }, 500);
+            }, 2000);
           
         </script>
         <script type="text/javascript">
@@ -276,7 +277,9 @@
             script.src = jsWithPath;
             document.getElementsByTagName('head')[0].appendChild(script);
         }
-            lazyLoad('plugins/amstock-accessibility.js');
+
+        lazyLoad('plugins/amstock-accessibility.js');
+
         </script>
     </head>
     <body>       
