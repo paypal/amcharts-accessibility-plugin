@@ -1,5 +1,5 @@
 /* ========================================================================
-* Copyright (c) <2014> eBay Software Foundation
+* Copyright (c) <2014> PayPal
 
 * All rights reserved.
 
@@ -9,7 +9,7 @@
 
 * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
-* Neither the name of eBay or any of its subsidiaries or affiliates nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+* Neither the name of PayPal or any of its subsidiaries or affiliates nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * ======================================================================== */
@@ -61,8 +61,10 @@ amChartAccess.prototype = {
         this.startIndex = this.sChart.startIndex;
         this.endIndex = this.sChart.endIndex;
         this.graphs = stockchart.panels[0].graphs;
+
         this.iconLeft = this.sChart.chartScrollbar.iconLeft;
         this.iconRight = this.sChart.chartScrollbar.iconRight;
+        
         this.sliderMin = AmCharts.formatDate(this.sChart.chartData[0].category, this.sChart.balloonDateFormat);
         this.sliderMax = AmCharts.formatDate(this.sChart.chartData[this.sChart.chartData.length-1].category, this.sChart.balloonDateFormat);
         this.step = this.sChart.chartScrollbar.stepWidth;
@@ -96,15 +98,11 @@ amChartAccess.prototype = {
     },
     createChartLabel: function(){
         var  allBullets,
-            chartCursor = this.stockchart.chartCursors[0],
-            firstTime = new Date(chartCursor.firstTime),
-            lastTime = new Date(chartCursor.lastTime),
+            chart = this.stockchart.chartCursors[0].chart,
+            firstTime = new Date(chart.firstTime),
+            lastTime = new Date(chart.lastTime),
             startLbl = AmCharts.formatDate(firstTime, 'MMM DD'),
             endLbl = AmCharts.formatDate(lastTime, 'MMM DD')
-
-           // for (var i = 0,j= this.graphs.length; i < j; i++) {           
-           //      this.chartLabel +=  this.graphs[i].title + ', ';
-           //  }
 
             this.chartLabel += startLbl + ' to ' + endLbl +'. ';
             this.chartLabel += this.chartHlpTxtNav;                
@@ -127,32 +125,45 @@ amChartAccess.prototype = {
             })
         }         
     },
+    findInd: function (myArray, searchTerm, property) {
+        for(var i = 0, len = myArray.length; i < len; i++) {
+            if (myArray[i][property] == searchTerm) {
+                return i;
+            }    
+        }
+        return -1;
+    },
     chartKeyNavigation: function(e){
         var keyCode = e.keyCode || e.which,
             liveText='', i,j= this.graphs.length, graph,graphDataItem, serialDataItem, balloonText,
-            chartCursor = this.stockchart.chartCursors[0];
+            chartCursor = this.stockchart.chartCursors[0],
+            scrollbarChart = this.stockchart.scrollbarChart;
+
+            // console.log(chartCursor.chart);
 
         if (!/(37|39)/.test(keyCode)) return;
 
-        this.startIndex = chartCursor.start;
-        this.endIndex = chartCursor.end;
+        this.startIndex = chartCursor.chart.startIndex;
+        this.endIndex = chartCursor.chart.endIndex;
 
-        if(keyCode === 39) this.ind +=1;
-        if(keyCode === 37) this.ind -=1;
-
+        if(keyCode === 39) this.ind += 1;
+        if(keyCode === 37) this.ind -= 1;
 
         //Stick to end or beginning and do not wrap
         if (this.ind > this.endIndex) this.ind = this.endIndex;
         if (this.ind < this.startIndex) this.ind = this.startIndex;
 
-        chartCursor.showCursorAt(chartCursor.data[this.ind].category);
-        this.speakBalloon(chartCursor, chartCursor.data[this.ind].category, this.ind, this.startIndex,this.endIndex)
+        // console.log(this.ind, this.stockchart.mainDataSet.dataProvider[this.ind]);
+        var curObj= chartCursor.chart.chartData[this.ind]; 
+        chartCursor.showCursorAt(curObj.category);
+        this.speakBalloon(chartCursor, curObj.category, this.ind, this.startIndex,this.endIndex)
 
     },
     speakBalloon: function(chartCursor, category, index, startIndex, endIndex ){
         var liveText='', i, j= this.graphs.length, graph, graphDataItem, serialDataItem, balloonText, fDate = null;
         fDate= AmCharts.formatDate(category, chartCursor.categoryBalloonDateFormat);
         liveText =  this.sChart.categoryField + ' ' + fDate + '<br>';
+       
         for (i = 0; i < j; i++) {
             graph = this.graphs[i];
             serialDataItem= this.graphs[i].data[index];
@@ -160,14 +171,16 @@ amChartAccess.prototype = {
             balloonText = this.sChart.formatString(graph.balloonText, graphDataItem, graph);
             liveText = liveText + graph.title + ' : ' + balloonText + '<br>';
         }
-
-        if(this.ind === this.endIndex) liveText =   this.chartHlpTxtEnd + '. ' + liveText;
-        if(this.ind === this.startIndex) liveText = this.chartHlpTxtStart  + '. ' + liveText;
+        
+        if(index === this.endIndex) liveText =   this.chartHlpTxtEnd + '. ' + liveText;
+        if(index === this.startIndex) liveText = this.chartHlpTxtStart  + '. ' + liveText;
 
         this.statusDiv.innerHTML = liveText;
 
+        // console.log(liveText );
     },
     addAriaLeftSlider: function(){
+        // console.log(this.iconLeft.node);
         var _this=this,
             iconLeftLabel = this.leftSliderLabel + this.sChart.categoryField;
 
@@ -179,6 +192,7 @@ amChartAccess.prototype = {
         this.iconLeft.node.setAttribute("aria-valuemin", this.sliderMin);
         this.iconLeft.node.setAttribute("aria-valuemax", this.sliderMax);
         this.iconLeft.node.setAttribute("aria-valuetext", this.sliderMin);
+
         if (AmCharts.isNN) {
             this.iconLeft.node.addEventListener('keydown', function(e){ _this.leftSliderKeyNav(e)});
             this.iconLeft.node.addEventListener('focusout', function(e){}); 

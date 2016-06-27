@@ -10,11 +10,11 @@
         </style>
 
 
-        <link rel="stylesheet" href="amcharts_3.4.7.free/style.css" type="text/css">
+        <link rel="stylesheet" href="amstockchart_3.20.5.free/amcharts/style.css" type="text/css">
 
-        <script src="amcharts_3.4.7.free/amcharts.js" type="text/javascript"></script>
-        <script src="amcharts_3.4.7.free/serial.js" type="text/javascript"></script>
-        <script src="amcharts_3.4.7.free/amstock.js" type="text/javascript"></script>
+        <script src="amstockchart_3.20.5.free/amcharts/amcharts.js" type="text/javascript"></script>
+        <script src="amstockchart_3.20.5.free/amcharts/serial.js" type="text/javascript"></script>
+        <script src="amstockchart_3.20.5.free/amcharts/amstock.js" type="text/javascript"></script>
         <script type="text/javascript">
 
         
@@ -54,7 +54,8 @@
                     var categoryTextColor = chartSelectedFillColor;  
 
                     var totalSalesChart = new AmCharts.AmStockChart();
-                        totalSalesChart.pathToImages = "https://www.paypalobjects.com/webstatic/i/ex_me2/icon/";
+                        // totalSalesChart.pathToImages = "images/";
+                        // totalSalesChart.svgIcons =false;
                         AmCharts.dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                         AmCharts.shortDayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                         AmCharts.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -241,8 +242,9 @@
                                             'leftSliderLabel':'Start',
                                             'rightSliderLabel':'End'
                                         }
-
+                setTimeout(function(){
                     amChartAccess.prototype.init(totalSalesChart , chartArguments);
+                }, 1000);
                     
             }   
 
@@ -252,7 +254,7 @@
                     anchors[i].setAttribute('tabIndex',-1);
                 }
                 // console.log('here', anchors);
-            }, 500);
+            }, 2000);
           
         </script>
         <script type="text/javascript">
@@ -275,7 +277,9 @@
             script.src = jsWithPath;
             document.getElementsByTagName('head')[0].appendChild(script);
         }
-            lazyLoad('plugins/amstock-accessibility.min.js');
+
+        lazyLoad('plugins/amstock-accessibility.js');
+
         </script>
     </head>
     <body>       
