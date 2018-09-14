@@ -1,7 +1,6 @@
+# This repo is no longer maintained. 
 <img src="images/logo/logo_347x50_PPa11y.png" alt="PayPal accessibility logo">
-# amCharts Accessibility Plugin
-## by the PayPal Accessibility Team
-See the [Authors](#authors) section below for more information.
+amCharts Accessibility Plugin by the PayPal Accessibility Team. See the [Authors](#authors) section below for more information.
 
 ## What is it?
 This plugin provides accessibility enhancements for a very versatile chart library from [amCharts.com](http://www.amcharts.com). Once applied, the plugin enables navigation for keyboard users and provides the necessary support for screen reader users.
